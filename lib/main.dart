@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +26,10 @@ class PageLogin extends StatefulWidget {
 }
 
 class _PageLoginState extends State<PageLogin> {
+  bool status = false;
+  TextEditingController username = new TextEditingController();
+  TextEditingController password = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +59,6 @@ class _PageLoginState extends State<PageLogin> {
             flex: 5,
             child: Stack(
               children: [
-
                 Container(
                   margin: EdgeInsets.only(top: 50),
                   decoration: BoxDecoration(
@@ -63,12 +68,10 @@ class _PageLoginState extends State<PageLogin> {
                       topLeft: Radius.circular(40.0),
                     ),
                   ),
-
                   child: Container(
                     margin: EdgeInsets.only(left: 34, right: 30),
                     child: Column(
                       children: [
-
                         Container(
                           margin: EdgeInsets.only(top: 30),
                           child: Align(
@@ -79,16 +82,18 @@ class _PageLoginState extends State<PageLogin> {
                           ),
                         ),
                         Container(
-
-                          child:
-                              TextField(decoration: InputDecoration(hintText: "")),
+                          child: TextField(
+                              controller: username,
+                              decoration:
+                                  InputDecoration(hintText: "username")),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 40),
-                          child:
-                              TextField(decoration: InputDecoration(hintText: "")),
+                          child: TextField(
+                              controller: password,
+                              decoration:
+                                  InputDecoration(hintText: "password")),
                         ),
-
                         Container(
                           child: Row(
                             children: [
@@ -114,10 +119,13 @@ class _PageLoginState extends State<PageLogin> {
                   right: 100,
                   top: 5,
                   child: Container(
-                    height: 75, width: 75,
+                    height: 75,
+                    width: 75,
                     child: FloatingActionButton(
                       backgroundColor: Colors.red,
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {});
+                      },
                       child: Icon(
                         Icons.arrow_forward,
                         size: 40,
@@ -134,4 +142,35 @@ class _PageLoginState extends State<PageLogin> {
       backgroundColor: Colors.redAccent,
     );
   }
+
+  Future<bool> login(String username, String password) async {
+    var url = Uri.http('192.168.1.42:8080', 'api/login');
+    var response =
+        await http.post(url, body: {'code': username, 'password': password});
+    if (response.statusCode == 200) {
+      var jsonResponse =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+      var status = jsonResponse['status'];
+      //  print("ผ่าน");
+      return true;
+    } else if (response.statusCode == 401) {
+      return false;
+    } else {
+      print("การเชื่อมต่อผิดพลาด");
+      return false;
+    }
+  }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: new Text("รหัสผ่านไม่ถูกต้อง!!"),
+        content: new Text("โปรดตรวจสอบชื่อผู้ใช้หรือรหัสผ่านอีกครั้ง!"),
+        actions: <Widget>[],
+      );
+    },
+  );
 }

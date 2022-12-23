@@ -124,7 +124,21 @@ class _PageLoginState extends State<PageLogin> {
                     child: FloatingActionButton(
                       backgroundColor: Colors.red,
                       onPressed: () {
-                        setState(() {});
+                        setState(() {
+                          FutureBuilder(
+                            future: login(username.text, password.text),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<dynamic> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                print(snapshot.data);
+                                var result = snapshot.data;
+                                return Text('data');
+                              }
+                              return CircularProgressIndicator();
+                            },
+                          );
+                        });
                       },
                       child: Icon(
                         Icons.arrow_forward,
@@ -143,16 +157,15 @@ class _PageLoginState extends State<PageLogin> {
     );
   }
 
-  Future<bool> login(String username, String password) async {
+  Future<dynamic> login(String username, String password) async {
     var url = Uri.http('192.168.1.42:8080', 'api/login');
     var response =
         await http.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {
-      var jsonResponse =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
-      var status = jsonResponse['status'];
+      var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
+      var status = data['status'];
       //  print("ผ่าน");
-      return true;
+      return data;
     } else if (response.statusCode == 401) {
       return false;
     } else {

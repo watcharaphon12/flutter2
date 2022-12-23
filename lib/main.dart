@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+import 'package:test1/home.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -125,19 +127,14 @@ class _PageLoginState extends State<PageLogin> {
                       backgroundColor: Colors.red,
                       onPressed: () {
                         setState(() {
-                          FutureBuilder(
-                            future: login(username.text, password.text),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<dynamic> snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                print(snapshot.data);
-                                var result = snapshot.data;
-                                return Text('data');
-                              }
-                              return CircularProgressIndicator();
-                            },
-                          );
+                                    login(username.text, password.text).then((value) {
+                                      if(status){
+                                       Navigator.push(context, MaterialPageRoute(builder: (context) => Home() ));
+
+                                      }else{
+                                        _showDialog(context);
+                                      }
+                                    });
                         });
                       },
                       child: Icon(
@@ -157,19 +154,21 @@ class _PageLoginState extends State<PageLogin> {
     );
   }
 
-  Future<dynamic> login(String username, String password) async {
-    var url = Uri.http('192.168.1.42:8080', 'api/login');
+  Future<bool> login(String username, String password) async {
+    var url = Uri.http('192.168.1.214:8080', 'api/login');
     var response =
         await http.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
-      var status = data['status'];
-      //  print("ผ่าน");
-      return data;
+      status = true;
+        print("ผ่าน");
+      return status;
     } else if (response.statusCode == 401) {
+      status =false;
       return false;
     } else {
       print("การเชื่อมต่อผิดพลาด");
+      status =false;
       return false;
     }
   }

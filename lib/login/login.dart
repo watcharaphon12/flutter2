@@ -156,7 +156,7 @@ class _PageLoginState extends State<PageLogin> {
 
   Future<bool> login(String username, String password) async {
     var client = http.Client();
-    var url = Uri.http('192.168.1.42:8080', 'api/login');
+    var url = Uri.http('192.168.1.214:8080', 'api/login');
     var response =
         await client.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {

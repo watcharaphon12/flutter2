@@ -93,36 +93,41 @@ class _IndexState extends State<Index> {
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
                       children: <Widget>[
-                        Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 194, 192, 192),
-                                  offset: Offset(0, 0),
-                                  blurRadius: 10.0,
-                                ),
-                              ]),
-                          padding: const EdgeInsets.all(20),
+                        GestureDetector(
+                          onTap: () {
+                            print('TESTT');
+                          },
                           child: Container(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    flex: 7,
-                                    child: Icon(
-                                      Icons.add_alert_outlined,
-                                      size: 40,
-                                      color: Colors.black,
-                                    )),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: const Text('แจ้งซ่อม',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ],
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 194, 192, 192),
+                                    offset: Offset(0, 0),
+                                    blurRadius: 10.0,
+                                  ),
+                                ]),
+                            padding: const EdgeInsets.all(20),
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                      flex: 7,
+                                      child: Icon(
+                                        Icons.add_alert_outlined,
+                                        size: 40,
+                                        color: Colors.black,
+                                      )),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: const Text('แจ้งซ่อม',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

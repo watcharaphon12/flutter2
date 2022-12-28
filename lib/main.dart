@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pmii/login/login.dart';
+import 'package:pmii/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'login',
-      home: PageLogin(),
+      theme: ThemeData(
+        fontFamily: 'NotoSerifThai'
+      ),
+      home: PageLogin()
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../wo/wo.dart';
 import 'index.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
   List<Widget> _buildScreens() {
     return [
       Index(),
-      Index()
+      Wo()
       ,Index(),
     ];
   }

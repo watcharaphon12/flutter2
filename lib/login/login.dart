@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pmii/home/home.dart';
 import 'package:pmii/dialog_custom.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class PageLogin extends StatefulWidget {
   const PageLogin({Key? key}) : super(key: key);
 
@@ -156,18 +156,17 @@ class _PageLoginState extends State<PageLogin> {
   }
 
   Future<bool> login(String username, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+
     var client = http.Client();
     var url = Uri.http('192.168.1.214:8080', 'api/login');
     var response =
     await client.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
-      AndroidOptions getAndroidOptions() => const AndroidOptions(
-        encryptedSharedPreferences: true,
-      );
-      final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
-      await storage.write(key: 'jwt', value: '1111');
-
+      await prefs.setString('token', data['authorisation']['token']);
+      String? token = prefs.getString('token');
+      print(token);
       status = true;
       print("ผ่าน");
       return status;

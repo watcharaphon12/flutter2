@@ -4,6 +4,7 @@ import 'dart:convert' as convert;
 import 'package:pmii/home/home.dart';
 import 'package:pmii/dialog_custom.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class PageLogin extends StatefulWidget {
   const PageLogin({Key? key}) : super(key: key);
 
@@ -12,7 +13,6 @@ class PageLogin extends StatefulWidget {
 }
 
 class _PageLoginState extends State<PageLogin> {
-
   bool status = false;
   bool _isLoading = false;
   bool buttonenabled = true;
@@ -32,7 +32,7 @@ class _PageLoginState extends State<PageLogin> {
                   children: [
                     Container(
                       margin:
-                      const EdgeInsets.only(left: 64, top: 140, right: 100),
+                          const EdgeInsets.only(left: 64, top: 140, right: 100),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text("Welcome ",
@@ -76,14 +76,14 @@ class _PageLoginState extends State<PageLogin> {
                           child: TextField(
                               controller: username,
                               decoration:
-                              InputDecoration(hintText: "username")),
+                                  InputDecoration(hintText: "username")),
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 40),
                           child: TextField(
                               controller: password,
                               decoration:
-                              InputDecoration(hintText: "password")),
+                                  InputDecoration(hintText: "password")),
                         ),
                         Container(
                           child: Row(
@@ -92,11 +92,11 @@ class _PageLoginState extends State<PageLogin> {
                                 padding: EdgeInsets.only(top: 35),
                                 child: Align(
                                     child: Text(
-                                      "Forgot password?",
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                      ),
-                                    )),
+                                  "Forgot password?",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                )),
                               )
                             ],
                           ),
@@ -159,9 +159,9 @@ class _PageLoginState extends State<PageLogin> {
     final prefs = await SharedPreferences.getInstance();
 
     var client = http.Client();
-    var url = Uri.http('192.168.1.214:8080', 'api/login');
+    var url = Uri.http('192.168.1.42:8080', 'api/login');
     var response =
-    await client.post(url, body: {'code': username, 'password': password});
+        await client.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
       await prefs.setString('token', data['authorisation']['token']);
@@ -180,7 +180,6 @@ class _PageLoginState extends State<PageLogin> {
     }
   }
 }
-
 
 void _showDialog(BuildContext context) {
   showDialog(

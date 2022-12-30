@@ -81,10 +81,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-     - family: NotoSerifThai
-       fonts:
-         - asset: asset/fonts/NotoSerifThai-VariableFont_wdth,wght.ttf
+  # fonts:
+  #    - family: NotoSerifThai
+  #      fonts:
+  #        - asset: asset/fonts/NotoSerifThai-VariableFont_wdth,wght.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

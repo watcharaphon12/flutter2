@@ -62,7 +62,9 @@ class _MachineState extends State<Machine> {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
+
     if (response.statusCode == 200) {
+      print(555);
       //  var data = convert.jsonDecode(response.body);
 
       GetMachine getMachine = new GetMachine();
@@ -87,8 +89,23 @@ class _MachineState extends State<Machine> {
       // print(data['data'][0]['code']);
       return true;
     } else {
+      print(response.statusCode);
+      return false;
       // กรณี error
-      throw Exception('Failed to load product');
+      //throw Exception('Failed to load product');
     }
   }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: new Text("รหัสผ่านไม่ถูกต้อง!!"),
+        content: new Text("โปรดตรวจสอบชื่อผู้ใช้หรือรหัสผ่านอีกครั้ง!"),
+        actions: <Widget>[],
+      );
+    },
+  );
 }

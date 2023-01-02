@@ -25,140 +25,150 @@ class _WoState extends State<Wo> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
         title: Center(
           child: Center(
-            child:  Text("แจ้งซ่อม",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)),
+            child: Text("แจ้งซ่อม",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           ),
         ),
       ),
-
       body: Container(
         color: Colors.white,
         width: double.infinity,
         child: Center(
           child: Column(
             children: [
-          Container(
-            width: double.infinity,
-              margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-
-         child:  Text("เครื่องจักร",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
-          ),
               Container(
-                margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-
-              width: double.infinity,
-                child:TextField(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Machine()));
-                  },
-                  decoration: InputDecoration(
-                      focusedBorder:OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))
-                      ),
-
-                      hintText: "เลือกเครื่องจักร")),
-                )
-                , Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-
-                  child:  Text("อุปกรณ์",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
-              ),
+                  margin:
+                      EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                  child: Text(
+                    "เครื่องจักร",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  )),
               Container(
-                margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-
+                margin:
+                    EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                 width: double.infinity,
-                child:TextField(
+                child: TextField(
+                    readOnly: true,
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Machine()));
+                              builder: (context) => new Machine()));
                     },
                     decoration: InputDecoration(
-                        focusedBorder:OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.redAccent, width: 2.0),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30))
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        hintText: "เลือกเครื่องจักร")),
+              ),
+              Container(
+                  width: double.infinity,
+                  margin:
+                      EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                  child: Text(
+                    "อุปกรณ์",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  )),
+              Container(
+                margin:
+                    EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                width: double.infinity,
+                child: TextField(
+                    readOnly: true,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => new Machine()));
+                    },
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.redAccent, width: 2.0),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                         hintText: "เลือกอุปกรณ์")),
-              )
-              , Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-                  child:  Text("อาการเสีย",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
               ),
               Container(
-                margin: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-
+                  width: double.infinity,
+                  margin:
+                      EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                  child: Text(
+                    "อาการเสีย",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  )),
+              Container(
+                margin:
+                    EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                 width: double.infinity,
-                child:TextField(
+                child: TextField(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Machine()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => Machine()));
                     },
                     decoration: InputDecoration(
-                        focusedBorder:OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.redAccent, width: 2.0),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30))
-                        ),
-
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                         hintText: "เลือกอาการเสีย")),
               ),
               Container(
-                margin: EdgeInsets.only(top: 30,left: 20,right: 20),
-
+                margin: EdgeInsets.only(top: 30, left: 20, right: 20),
                 width: double.infinity,
-                child:TextFormField(
+                child: TextFormField(
                   decoration: InputDecoration(
-                      hintText: "รายละเอียด",
+                    hintText: "รายละเอียด",
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))
-                    ),
-
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                   ),
-                  minLines: 4, // any number you need (It works as the rows for the textarea
+                  minLines:
+                      4, // any number you need (It works as the rows for the textarea
                   maxLines: null,
                 ),
               ),
               Container(
                 margin: EdgeInsets.all(20),
-                padding: EdgeInsets.only(right: 50,left: 50),
+                padding: EdgeInsets.only(right: 50, left: 50),
                 decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(25))
-
-
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: TextButton(
+                  child: Text(
+                    "ยืนยันการแจ้งซ่อม",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Machine()));
+                  },
                 ),
-                child: TextButton(child: Text("ยืนยันการแจ้งซ่อม",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),onPressed: null,),
-              )
-              ,
-
+              ),
             ],
           ),
         ),
       ),
     );
-
-
   }
 }

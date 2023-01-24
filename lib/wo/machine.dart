@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pmii/model/get_machine.dart';
-
+import 'package:pmii/model/connect.dart';
 class Machine extends StatefulWidget {
   const Machine({Key? key}) : super(key: key);
 
@@ -56,13 +56,10 @@ class _MachineState extends State<Machine> {
     final String? token = prefs.getString('token');
     var client = http.Client();
     var url = Uri.http(
-        '192.168.1.42:8080', 'api/data/get-machine', {"factory": "1310"});
+        Connect().domain, 'api/get-machine', {"token": token});
+    print(url);
     var response = await client.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
     });
-
     if (response.statusCode == 200) {
       print(555);
       //  var data = convert.jsonDecode(response.body);

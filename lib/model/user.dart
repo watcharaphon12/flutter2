@@ -1,12 +1,21 @@
 import 'dart:convert';
 
 class User {
-  User getUserFromJson(String str) => User.fromJson(json.decode(str));
-  String getUseroJson(User data) => json.encode(data.toJson());
+  List<User> getUserFromJson(String str) {
+    final jsonData = json.decode(str);
+    return new List<User>.from(jsonData.map((x) => User.fromJson(x)));
+  }
+
+  String getUserToJson(List<User> data) {
+    final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
+    return json.encode(dyn);
+  }
+  //User getUserFromJson(String str) => User.fromJson(json.decode(str));
+  // String getUserToJson(User data) => json.encode(data.toJson());
   int? id;
   String? code;
-  Null? email;
-  Null? emailVerifiedAt;
+  String? email;
+  String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
   String? apiToken;
@@ -15,16 +24,16 @@ class User {
   String? nameen;
   String? deptCode;
   String? groupCode;
-  Null? permissionCode;
+  String? permissionCode;
   String? factoryCode;
   String? titleCode;
   String? typeCode;
   String? prefixCode;
   String? internalPhone;
   int? wage;
-  Null? startDate;
+  String? startDate;
   String? packingDate;
-  Null? resignationDate;
+  String? resignationDate;
   String? resignationReason;
   String? statusRepair;
   String? departmentNameth;

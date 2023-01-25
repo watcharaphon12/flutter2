@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -7,6 +6,8 @@ import 'package:pmii/home/home.dart';
 import 'package:pmii/dialog_custom.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pmii/model/connect.dart';
+import 'package:pmii/model/user.dart';
+
 class PageLogin extends StatefulWidget {
   const PageLogin({Key? key}) : super(key: key);
 
@@ -159,19 +160,18 @@ class _PageLoginState extends State<PageLogin> {
 
   Future<bool> login(String username, String password) async {
     final prefs = await SharedPreferences.getInstance();
-    var client = http.Client();
     String domain = Connect().domain;
-    var connect =new Connect();
+    Connect connect = new Connect();
+
     var url = Uri.http(domain, 'api/sent-login');
+    print(url);
     var response =
-        await client.post(url, body: {'code': username, 'password': password});
+        await http.post(url, body: {'code': username, 'password': password});
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
-      connect.setToken(data['api_token']);
-      connect.setUser(response.body);
+      connect.setToken(data['api_token'], data['code']);
       String? token = prefs.getString('token');
-      String? user = prefs.getString('user');
-      print(user);
+      print(connect.getUser());
       status = true;
       print("ผ่าน");
       return status;

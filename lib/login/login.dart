@@ -170,8 +170,6 @@ class _PageLoginState extends State<PageLogin> {
     if (response.statusCode == 200) {
       var data = convert.jsonDecode(response.body) as Map<String, dynamic>;
       connect.setToken(data['api_token'], data['code']);
-      String? token = prefs.getString('token');
-      print(connect.getUser());
       status = true;
       print("ผ่าน");
       return status;

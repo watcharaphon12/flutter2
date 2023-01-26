@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmii/model/connect.dart';
 
 class Index extends StatefulWidget {
   const Index({super.key});
@@ -8,6 +9,23 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  String? username;
+  String? department;
+  @override
+  void initState() {
+    setProfile();
+    super.initState();
+  }
+
+  Future<void> setProfile() async {
+    Connect connect = new Connect();
+    var data = await connect.getUser();
+    username = data.code.toString();
+    department = data.departmentNameth.toString();
+    print(username);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +53,7 @@ class _IndexState extends State<Index> {
                 Container(
                   margin: EdgeInsets.only(top: 5),
                   child: Text(
-                    "Ramsy Roger",
+                    "$username",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
@@ -45,7 +63,7 @@ class _IndexState extends State<Index> {
                 Container(
                   margin: EdgeInsets.only(top: 5, bottom: 8),
                   child: Text(
-                    "แผนก ซ่อมเครื่องจักร",
+                    "แผนก $department",
                     style: TextStyle(
                         color: Color.fromARGB(255, 215, 213, 213),
                         fontSize: 13,
